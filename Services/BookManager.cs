@@ -67,6 +67,7 @@ namespace Services
             entity.price = book.price;
             _manager.Save();
             _logger.LogInformation($"Book with id: {id} updated successfully.");
+            
         }
     }
 }
