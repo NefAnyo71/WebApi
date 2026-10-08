@@ -13,14 +13,13 @@ namespace WebApi.Controllers
     public class BookController : ControllerBase
     {
         private readonly IRepositoryManager _manager;
+        private readonly ILogger<BookController> _logger;
 
         public BookController(IRepositoryManager manager, ILogger<BookController> logger)
         {
             _manager = manager;
             _logger = logger;
         }
-
-        private readonly ILogger<BookController> _logger;
 
         [HttpGet]
         public IActionResult GetAllBooks()
