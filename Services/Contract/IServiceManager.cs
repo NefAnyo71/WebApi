@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Services.Contract
 {
-    public interface IServerManager
+    public interface IServiceManager
     {
         IBookServices Book { get; }
-
+        void Save();
     }
 }

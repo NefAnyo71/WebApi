@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Repositories.Contracts;
 using Repositories.EFCore;
+using Services.Contract;
 
 namespace WebApi.Controllers
 {
@@ -12,12 +13,12 @@ namespace WebApi.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private readonly IRepositoryManager _manager;
         private readonly ILogger<BookController> _logger;
+        private readonly IServiceManager _manager;
 
-        public BookController(IRepositoryManager manager, ILogger<BookController> logger)
+        public BookController(IServiceManager serviceManager, ILogger<BookController> logger)
         {
-            _manager = manager;
+            _manager = serviceManager;
             _logger = logger;
         }
 
@@ -121,7 +122,7 @@ namespace WebApi.Controllers
                         message = $"Book with id: '{id}' could not found."
                     });
                 }
-                _manager.Book.DeleteOneBook(entity);
+                _manager.Book.DeleteOneBook(id, entity, true);
                 _manager.Save();
                 _logger.LogInformation($"{id} ID'li kitap mysql den silindi.",id);
                 return NoContent();
